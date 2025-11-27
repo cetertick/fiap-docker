@@ -5,7 +5,6 @@ Este pacote contém:
 - Aplicação Flask
 - Dockerfile otimizado
 - Docker Compose com Postgres
-- Slides em Markdown
 
 ## Como usar
 
