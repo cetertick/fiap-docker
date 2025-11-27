@@ -1,18 +1,30 @@
-version: "3.9"
 services:
   app:
     build: .
     ports:
       - "5000:5000"
+    restart: unless-stopped
     environment:
       DB_HOST: db
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
       DB_NAME: ${DB_NAME}
+      PYTHONUNBUFFERED: "1"
+      TZ: "America/Sao_Paulo"
     depends_on:
       - db
     networks:
       - backend
+
+    # Limites de CPU e memória
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"   # 50% de um core
+          memory: "512M" # máximo de 512 MB
+        reservations:
+          cpus: "0.25"   # reserva sugerida
+          memory: "256M" # reserva sugerida
 
   db:
     image: postgres:16
